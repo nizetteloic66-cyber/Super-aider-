@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Super Aide — petits services, rangement, nettoyage et coups de main du quotidien.">
+  <title>Super Aide — Un coup de main, tout simplement</title>
+  <style>
+    :root{
+      --navy:#0b3b70; --gold:#ffb900; --cream:#fffaf0;
+      --ink:#17324d; --muted:#5f7182; --white:#fff;
+      --shadow:0 18px 45px rgba(11,59,112,.12);
+      --radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,92%);margin:auto}
+    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid #edf1f5}
+    nav{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.3rem;color:var(--navy)}
+    .brand-dot{width:12px;height:12px;border-radius:50%;background:var(--gold);display:inline-block}
+    nav ul{display:flex;gap:25px;list-style:none;font-weight:700;color:#39546d}
+    nav li a:hover{color:var(--navy)}
+    .hero{background:linear-gradient(135deg,#fff 0%,#fffaf0 55%,#eef6ff 100%);padding:70px 0 80px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:45px}
+    .pill{display:inline-block;padding:8px 14px;border-radius:999px;background:#fff2c7;color:#7a5600;font-weight:800;font-size:.9rem;margin-bottom:18px}
+    h1{font-size:clamp(2.6rem,6vw,5rem);line-height:1.02;color:var(--navy);letter-spacing:-2px;margin-bottom:20px}
+    h1 span{color:var(--gold)}
+    .hero p{font-size:1.16rem;color:var(--muted);max-width:650px;margin-bottom:28px}
+    .buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:14px;font-weight:900;border:2px solid transparent}
+    .btn-primary{background:var(--navy);color:#fff}
+    .btn-primary:hover{background:#082f5a}
+    .btn-secondary{border-color:#d8e0e8;background:#fff}
+    .hero-card{background:#fff;border-radius:30px;padding:25px;box-shadow:var(--shadow);text-align:center}
+    .hero-card img{width:100%;max-width:470px;display:block;margin:auto}
+    section{padding:78px 0}
+    .section-head{text-align:center;max-width:720px;margin:0 auto 40px}
+    .section-head h2{font-size:clamp(2rem,4vw,3rem);color:var(--navy);margin-bottom:10px}
+    .section-head p{color:var(--muted)}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:#fff;border:1px solid #e8eef4;border-radius:var(--radius);padding:28px;box-shadow:0 10px 28px rgba(15,54,87,.05)}
+    .icon{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:#fff3c9;color:#9a6a00;font-size:1.5rem;margin-bottom:18px}
+    .card h3{color:var(--navy);margin-bottom:8px}
+    .card p{color:var(--muted)}
+    .price-wrap{background:var(--cream)}
+    .price{font-size:2.2rem;font-weight:900;color:var(--navy);margin:12px 0}
+    .price span{font-size:1rem;color:var(--muted);font-weight:600}
+    .zone{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:stretch}
+    .zone-box{background:var(--navy);color:#fff;border-radius:28px;padding:35px}
+    .zone-box h3{font-size:2rem;margin-bottom:12px}
+    .zone-number{font-size:4rem;font-weight:900;color:var(--gold);line-height:1;margin:15px 0}
+    .zone-note{background:#f7fbff;border:1px solid #e1edf8;border-radius:28px;padding:35px}
+    .schedule{background:#f7fbff}
+    .hours{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:760px;margin:auto}
+    .day{background:#fff;border:1px solid #e2eaf2;border-radius:18px;padding:20px 22px;display:flex;justify-content:space-between;gap:15px;align-items:center}
+    .day strong{color:var(--navy)}
+    .available{font-weight:900;color:#16824a}
+    .unavailable{font-weight:900;color:#b04444}
+    .contact{background:linear-gradient(135deg,#0b3b70,#125998);color:#fff}
+    .contact .section-head h2,.contact .section-head p{color:#fff}
+    .contact-box{background:#fff;color:var(--ink);border-radius:28px;padding:30px;max-width:760px;margin:auto;box-shadow:var(--shadow)}
+    label{display:block;font-weight:800;margin:0 0 7px}
+    input,textarea{width:100%;padding:13px 14px;border:1px solid #d8e1ea;border-radius:12px;font:inherit;margin-bottom:16px}
+    textarea{min-height:120px;resize:vertical}
+    .footer{padding:30px 0;color:#718294;text-align:center;font-size:.9rem}
+    .tiny{font-size:.82rem;color:#7a8794;margin-top:15px}
+    @media(max-width:800px){
+      nav ul{display:none}
+      .hero-grid,.zone{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr}
+      .hours{grid-template-columns:1fr}
+      .hero{padding-top:45px}
+      section{padding:58px 0}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <a class="brand" href="#accueil"><span class="brand-dot"></span>Super Aide</a>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#tarifs">Tarifs</a></li>
+        <li><a href="#zone">Zone</a></li>
+        <li><a href="#horaires">Horaires</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="accueil">
+    <div class="container hero-grid">
+      <div>
+        <span class="pill">Un coup de main, tout simplement</span>
+        <h1>Besoin d'un petit <span>coup de main</span> ?</h1>
+        <p>Super Aide propose des petits services du quotidien : rangement, nettoyage et autres coups de main, selon les besoins.</p>
+        <div class="buttons">
+          <a class="btn btn-primary" href="#contact">Demander un service</a>
+          <a class="btn btn-secondary" href="#services">Voir les services</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="logo-super-aide.png" alt="Logo Super Aide">
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Mes services</h2>
+        <p>Des petits coups de main simples et pratiques pour vous faciliter le quotidien.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="icon">🧹</div>
+          <h3>Nettoyage</h3>
+          <p>Petit nettoyage et remise en ordre de certains espaces, selon la demande.</p>
+        </article>
+        <article class="card">
+          <div class="icon">📦</div>
+          <h3>Rangement</h3>
+          <p>Tri, rangement et organisation de petits espaces pour retrouver un intérieur plus agréable.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🤝</div>
+          <h3>Petits services</h3>
+          <p>Un coup de main pour des tâches simples du quotidien. Décrivez votre besoin et on voit ensemble.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="price-wrap" id="tarifs">
+    <div class="container">
+      <div class="section-head">
+        <h2>Des tarifs simples</h2>
+        <p>Le prix dépend du service demandé et du temps nécessaire.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <h3>Petit service</h3>
+          <div class="price">5–10 €</div>
+          <p>Pour une petite tâche rapide.</p>
+        </article>
+        <article class="card">
+          <h3>Service standard</h3>
+          <div class="price">10–15 €</div>
+          <p>Pour une intervention un peu plus longue.</p>
+        </article>
+        <article class="card">
+          <h3>Service plus complet</h3>
+          <div class="price">15–20 €</div>
+          <p>Pour une tâche demandant davantage de temps.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="horaires">
+    <div class="container">
+      <div class="section-head">
+        <h2>Mes disponibilités</h2>
+        <p>Je suis disponible en semaine, du lundi au vendredi.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="icon">🕗</div>
+          <h3>Lundi à vendredi</h3>
+          <div class="price">8h – 16h</div>
+          <p>Disponible pour les demandes et interventions pendant ces horaires.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🌙</div>
+          <h3>Samedi & dimanche</h3>
+          <div class="price">Non disponible</div>
+          <p>Les interventions ne sont pas prévues le week-end.</p>
+        </article>
+        <article class="card">
+          <div class="icon">📅</div>
+          <h3>À l'avance</h3>
+          <p>Pour organiser au mieux une intervention, pensez à faire votre demande à l'avance.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="zone">
+    <div class="container zone">
+      <div class="zone-box">
+        <h3>Zone de déplacement</h3>
+        <div class="zone-number">20–50 km</div>
+        <p>Les déplacements sont possibles dans un rayon d'environ 20 à 50 km, selon la demande.</p>
+      </div>
+      <div class="zone-note">
+        <h3>Une demande particulière ?</h3>
+        <p style="margin-top:10px;color:#5f7182">Même si votre besoin n'est pas exactement dans la liste, vous pouvez le décrire. Nous pourrons vérifier ensemble si le service est possible.</p>
+        <a class="btn btn-primary" style="margin-top:22px" href="#contact">Me contacter</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="schedule" id="horaires">
+    <div class="container">
+      <div class="section-head">
+        <h2>Mes horaires</h2>
+        <p>Je suis disponible en semaine, du matin jusqu'à la fin d'après-midi.</p>
+      </div>
+      <div class="hours">
+        <div class="day"><strong>Lundi</strong><span class="available">08h00 – 16h00</span></div>
+        <div class="day"><strong>Mardi</strong><span class="available">08h00 – 16h00</span></div>
+        <div class="day"><strong>Mercredi</strong><span class="available">08h00 – 16h00</span></div>
+        <div class="day"><strong>Jeudi</strong><span class="available">08h00 – 16h00</span></div>
+        <div class="day"><strong>Vendredi</strong><span class="available">08h00 – 16h00</span></div>
+        <div class="day"><strong>Samedi & dimanche</strong><span class="unavailable">Non disponible</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Demander un service</h2>
+        <p>Décrivez simplement ce dont vous avez besoin.</p>
+      </div>
+      <div class="contact-box">
+        <form onsubmit="sendRequest(event)">
+          <label for="name">Votre prénom</label>
+          <input id="name" name="name" required placeholder="Ex. Camille">
+          <label for="message">Votre demande</label>
+          <textarea id="message" name="message" required placeholder="Ex. J'aurais besoin d'aide pour ranger..."></textarea>
+          <button class="btn btn-primary" type="submit">Envoyer la demande</button>
+          <p class="tiny">Le bouton de contact doit être relié à une adresse e-mail ou un service de formulaire avant la mise en ligne.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <strong>Super Aide</strong> — Un coup de main, tout simplement.
+    <div class="tiny">Site en cours de personnalisation. Les modalités de contact, de paiement et d'activité devront être vérifiées avant publication.</div>
+  </div>
+</footer>
+
+<script>
+function sendRequest(e){
+  e.preventDefault();
+  alert("Merci ! Le formulaire est prêt. Il reste à le connecter à ton adresse e-mail avant la mise en ligne.");
+}
+</script>
+</body>
+</html>
